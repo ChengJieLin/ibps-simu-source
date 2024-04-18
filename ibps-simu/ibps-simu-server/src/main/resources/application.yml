@@ -1,3 +1,9 @@
+server:
+  servlet:
+    context-path: /admin-api
+
 spring:
+  application:
+    name: ibps-simu-server
   profiles:
     active: local

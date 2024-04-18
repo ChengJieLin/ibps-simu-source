@@ -1,4 +1,4 @@
-package com.ibeyoung.simu;
+package com.ibeyoung.simu.server;
 
 
 import org.springframework.boot.SpringApplication;
