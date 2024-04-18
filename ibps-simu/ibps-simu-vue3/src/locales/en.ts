@@ -113,8 +113,8 @@ export default {
     small: 'Small'
   },
   login: {
-    welcome: 'Welcome to the system',
-    message: 'Backstage management system',
+    welcome: 'Welcome to the tools',
+    message: 'Happ to testding ibps by the tools',
     tenantname: 'TenantName',
     username: 'Username',
     password: 'Password',

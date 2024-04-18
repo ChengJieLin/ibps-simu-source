@@ -12,6 +12,7 @@ const router = createRouter({
 })
 
 export const resetRouter = (): void => {
+  // 白名单菜单 
   const resetWhiteNameList = ['Redirect', 'Login', 'NoFind', 'Root']
   router.getRoutes().forEach((route) => {
     const { name } = route

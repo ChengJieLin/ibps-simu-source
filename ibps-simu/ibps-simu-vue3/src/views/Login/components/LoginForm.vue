@@ -75,17 +75,21 @@
           />
         </el-form-item>
       </el-col>
+
+      <!-- 自定义验证码组件    如果开启了验证码功能，那么就展示验证码组件-->
       <Verify
+        v-if="loginData.captchaEnable === 'true'"
         ref="verify"
         :captchaType="captchaType"
         :imgSize="{ width: '400px', height: '200px' }"
         mode="pop"
         @success="handleLogin"
       />
+
       <el-col :span="24" style="padding-right: 10px; padding-left: 10px">
         <el-form-item>
           <el-row :gutter="5" justify="space-between" style="width: 100%">
-            <el-col :span="8">
+            <!-- <el-col :span="8">
               <XButton
                 :title="t('login.btnMobile')"
                 class="w-[100%]"
@@ -98,8 +102,8 @@
                 class="w-[100%]"
                 @click="setLoginState(LoginStateEnum.QR_CODE)"
               />
-            </el-col>
-            <el-col :span="8">
+            </el-col> -->
+            <el-col :span="24">
               <XButton
                 :title="t('login.btnRegister')"
                 class="w-[100%]"
@@ -109,7 +113,8 @@
           </el-row>
         </el-form-item>
       </el-col>
-      <el-divider content-position="center">{{ t('login.otherLogin') }}</el-divider>
+
+      <!-- <el-divider content-position="center">{{ t('login.otherLogin') }}</el-divider>
       <el-col :span="24" style="padding-right: 10px; padding-left: 10px">
         <el-form-item>
           <div class="w-[100%] flex justify-between">
@@ -124,8 +129,10 @@
             />
           </div>
         </el-form-item>
-      </el-col>
-      <el-divider content-position="center">萌新必读</el-divider>
+      </el-col> -->
+
+
+      <!-- <el-divider content-position="center">萌新必读</el-divider>
       <el-col :span="24" style="padding-right: 10px; padding-left: 10px">
         <el-form-item>
           <div class="w-[100%] flex justify-between">
@@ -139,7 +146,8 @@
             </el-link>
           </div>
         </el-form-item>
-      </el-col>
+      </el-col> -->
+
     </el-row>
   </el-form>
 </template>
@@ -201,64 +209,74 @@ const socialList = [
 
 // 获取验证码
 const getCode = async () => {
-  // 情况一，未开启：则直接登录
-  if (loginData.captchaEnable === 'false') {
-    await handleLogin({})
-  } else {
-    // 情况二，已开启：则展示验证码；只有完成验证码的情况，才进行登录
-    // 弹出验证码
-    verify.value.show()
-  }
+    // 情况一，未开启：则直接登录
+    if (loginData.captchaEnable === 'false') {
+        console.log('未开启验证码,直接登录')
+        await handleLogin({})
+    } else {
+        // 情况二，已开启：则展示验证码；只有完成验证码的情况，才进行登录
+        // 弹出验证码
+        verify.value.show()
+    }
 }
 // 获取租户 ID
 const getTenantId = async () => {
-  if (loginData.tenantEnable === 'true') {
-    const res = await LoginApi.getTenantIdByName(loginData.loginForm.tenantName)
-    authUtil.setTenantId(res)
-  }
+    if (loginData.tenantEnable === 'true') {
+        const res = await LoginApi.getTenantIdByName(loginData.loginForm.tenantName)
+        authUtil.setTenantId(res)
+    }{
+        console.log('没有开启多租户')
+    }
 }
 // 记住我
 const getLoginFormCache = () => {
-  const loginForm = authUtil.getLoginForm()
-  if (loginForm) {
-    loginData.loginForm = {
-      ...loginData.loginForm,
-      username: loginForm.username ? loginForm.username : loginData.loginForm.username,
-      password: loginForm.password ? loginForm.password : loginData.loginForm.password,
-      rememberMe: loginForm.rememberMe,
-      tenantName: loginForm.tenantName ? loginForm.tenantName : loginData.loginForm.tenantName
+    //从缓存中获取loginForm
+    const loginForm = authUtil.getLoginForm()
+    if (loginForm) {
+        loginData.loginForm = {
+            ...loginData.loginForm,
+            username: loginForm.username ? loginForm.username : loginData.loginForm.username,
+            password: loginForm.password ? loginForm.password : loginData.loginForm.password,
+            rememberMe: loginForm.rememberMe,
+            tenantName: loginForm.tenantName ? loginForm.tenantName : loginData.loginForm.tenantName
+        }
     }
-  }
 }
-// 根据域名，获得租户信息
+// 根据域名，获得租户信息       这个地方修改一下    如果没有开启租户，那么就不调用
 const getTenantByWebsite = async () => {
-  const website = location.host
-  const res = await LoginApi.getTenantByWebsite(website)
-  if (res) {
-    loginData.loginForm.tenantName = res.name
-    authUtil.setTenantId(res.id)
-  }
+    if (loginData.tenantEnable === 'true') {
+        console.log('->开启多租户,根据域名,获得租户信息')
+        const website = location.host
+        const res = await LoginApi.getTenantByWebsite(website)
+        if (res) {
+            loginData.loginForm.tenantName = res.name
+            authUtil.setTenantId(res.id)
+        }
+    }
 }
 const loading = ref() // ElLoading.service 返回的实例
+
 // 登录
 const handleLogin = async (params) => {
-  loginLoading.value = true
-  try {
-    await getTenantId()
-    const data = await validForm()
-    if (!data) {
-      return
-    }
-    loginData.loginForm.captchaVerification = params.captchaVerification
-    const res = await LoginApi.login(loginData.loginForm)
-    if (!res) {
-      return
-    }
-    loading.value = ElLoading.service({
-      lock: true,
-      text: '正在加载系统中...',
-      background: 'rgba(0, 0, 0, 0.7)'
-    })
+    loginLoading.value = true   //设置登录中
+    try {
+        await getTenantId()
+        const data = await validForm()
+        if (!data) {
+            console.error('验证form失败')
+            return
+        }
+        loginData.loginForm.captchaVerification = params.captchaVerification
+        const res = await LoginApi.login(loginData.loginForm)
+        if (!res) {
+            console.error('后台没有响应数据')
+            return
+        }
+        loading.value = ElLoading.service({
+            lock: true,
+            text: '正在加载系统中...',
+            background: 'rgba(0, 0, 0, 0.7)'
+        })
     if (loginData.loginForm.rememberMe) {
       authUtil.setLoginForm(loginData.loginForm)
     } else {
@@ -325,9 +343,10 @@ watch(
     immediate: true
   }
 )
+//组件创建之前调用
 onMounted(() => {
-  getLoginFormCache()
-  getTenantByWebsite()
+    getLoginFormCache()
+    getTenantByWebsite() //根据域名获取租户id
 })
 </script>
 

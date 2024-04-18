@@ -35,6 +35,17 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- SIMU项目的通用以来 -->
+            <dependency>
+                <groupId>com.ibeyoung</groupId>
+                <artifactId>framework-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ibeyoung</groupId>
+                <artifactId>framework-boot-starter-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

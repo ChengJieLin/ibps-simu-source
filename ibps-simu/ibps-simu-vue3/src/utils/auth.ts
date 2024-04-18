@@ -44,11 +44,11 @@ export type LoginFormType = {
 }
 
 export const getLoginForm = () => {
-  const loginForm: LoginFormType = wsCache.get(CACHE_KEY.LoginForm)
-  if (loginForm) {
-    loginForm.password = decrypt(loginForm.password) as string
-  }
-  return loginForm
+    const loginForm: LoginFormType = wsCache.get(CACHE_KEY.LoginForm)
+    if (loginForm) {
+        loginForm.password = decrypt(loginForm.password) as string
+    }
+    return loginForm
 }
 
 export const setLoginForm = (loginForm: LoginFormType) => {

@@ -113,8 +113,8 @@ export default {
     small: '小'
   },
   login: {
-    welcome: '欢迎使用本系统',
-    message: '开箱即用的中后台管理系统',
+    welcome: '欢迎使用本工具',
+    message: '快乐使用本工具开始模拟测试IBPS',
     tenantname: '租户名称',
     username: '用户名',
     password: '密码',

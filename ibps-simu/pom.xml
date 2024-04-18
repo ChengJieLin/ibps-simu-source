@@ -14,6 +14,8 @@
     <modules>
         <module>ibps-simu-dependencies</module>
         <module>ibps-simu-server</module>
+        <module>ibps-simu-system</module>
+        <module>framework</module>
 
     </modules>
 

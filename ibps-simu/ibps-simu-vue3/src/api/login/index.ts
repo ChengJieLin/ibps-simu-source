@@ -54,14 +54,15 @@ export const smsLogin = (data: SmsLoginVO) => {
 
 // 社交快捷登录，使用 code 授权码
 export function socialLogin(type: string, code: string, state: string) {
-  return request.post({
-    url: '/system/auth/social-login',
-    data: {
-      type,
-      code,
-      state
-    }
-  })
+    console.log('社交快捷登录')
+    return request.post({
+        url: '/system/auth/social-login',
+        data: {
+            type,
+            code,
+            state
+        }
+    })
 }
 
 // 社交授权的跳转

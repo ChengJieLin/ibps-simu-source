@@ -224,6 +224,7 @@ const getTenantId = async () => {
 }
 // 记住我
 const getCookie = () => {
+    console.log('获取缓存')
   const loginForm = authUtil.getLoginForm()
   if (loginForm) {
     loginData.loginForm = {
@@ -245,17 +246,19 @@ function getUrlValue(key: string): string {
 
 // 尝试登录: 当账号已经绑定，socialLogin会直接获得token
 const tryLogin = async () => {
-  try {
-    const type = getUrlValue('type')
-    const redirect = getUrlValue('redirect')
-    const code = route?.query?.code as string
-    const state = route?.query?.state as string
+    console.log('尝试登录')
+    try {
+        const type = getUrlValue('type')
+        const redirect = getUrlValue('redirect')
+        const code = route?.query?.code as string
+        const state = route?.query?.state as string
 
-    const res = await LoginApi.socialLogin(type, code, state)
-    authUtil.setToken(res)
-
-    router.push({ path: redirect || '/' })
-  } catch (err) {}
+        const res = await LoginApi.socialLogin(type, code, state)
+        authUtil.setToken(res)
+        router.push({ path: redirect || '/' })
+    } catch (err) {
+        console.error('尝试登录出现异常')
+    }
 }
 
 // 登录

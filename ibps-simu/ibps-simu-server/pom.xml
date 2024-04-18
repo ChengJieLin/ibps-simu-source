@@ -20,17 +20,16 @@
 
 
     <dependencies>
-        <!-- spring boot web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <optional>true</optional>
-        </dependency>
         <!-- spring boot 配置所需依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.ibeyoung</groupId>
+            <artifactId>ibps-simu-system-biz</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 
