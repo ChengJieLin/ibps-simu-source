@@ -14,5 +14,6 @@
     <modules>
         <module>framework-common</module>
         <module>framework-boot-starter-web</module>
+        <module>framework-mybatis-plus</module>
     </modules>
 </project>
