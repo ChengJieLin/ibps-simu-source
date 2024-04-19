@@ -14,6 +14,7 @@ public class AdminAuthServiceImpl implements AdminAuthService{
         log.debug("*****************登录*****************");
         log.debug("{}",reqVO);
         AuthLoginRespVO respVO=new AuthLoginRespVO();
+        this.authenticate(reqVO.getUsername(),reqVO.getPassword());
         return respVO;
     }
 

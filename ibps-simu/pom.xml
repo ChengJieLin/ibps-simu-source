@@ -116,6 +116,14 @@
         </plugins>
     </build>
 
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyunmaven</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </pluginRepository>
+    </pluginRepositories>
     <!-- 使用 huawei / aliyun 的 Maven 源，提升下载速度 -->
     <repositories>
         <repository>

@@ -14,6 +14,7 @@ npm config set cache "D:\Program Files\nodejs\node_cache"
 
 # 
 npm config set registry https://registry.npmjs.org
+npm config set registry https://registry.npm.taobao.org
 # 全局安装pnpm安装 pnpm，提升依赖的安装速度       注意pnpm版本
 npm install -g pnpm@8.6.0
 
