@@ -3,6 +3,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+
+
 ### IntelliJ IDEA ###
 .idea/*
 .idea/modules.xml
@@ -43,4 +45,7 @@ target/
 /ibps-simu-system/ibps-simu-system-api/.flattened-pom.xml
 /ibps-simu-system/ibps-simu-system-biz/.flattened-pom.xml
 /ibps-simu-system/.flattened-pom.xml
-/.flattened-pom.xml
+
+
+
+.flattened-pom.xml
