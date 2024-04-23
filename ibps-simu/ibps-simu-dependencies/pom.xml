@@ -20,6 +20,10 @@
 
         <!-- 统一依赖管理 -->
         <spring.boot.version>3.2.2</spring.boot.version>
+        <!-- DB 相关 -->
+        <druid.version>1.2.21</druid.version>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
+        <mybatis-plus-generator.version>3.5.5</mybatis-plus-generator.version>
     </properties>
 
 
@@ -34,7 +38,21 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-3-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId> <!-- 代码生成器，使用它解析表结构 -->
+                <version>${mybatis-plus-generator.version}</version>
+            </dependency>
             <!-- SIMU项目的通用以来 -->
             <dependency>
                 <groupId>com.ibeyoung</groupId>
@@ -44,6 +62,11 @@
             <dependency>
                 <groupId>com.ibeyoung</groupId>
                 <artifactId>framework-boot-starter-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ibeyoung</groupId>
+                <artifactId>framework-mybatis-plus</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>

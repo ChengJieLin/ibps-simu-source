@@ -28,7 +28,6 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
@@ -37,3 +36,11 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/framework/framework-boot-starter-web/.flattened-pom.xml
+/framework/framework-common/.flattened-pom.xml
+/framework/.flattened-pom.xml
+/ibps-simu-server/.flattened-pom.xml
+/ibps-simu-system/ibps-simu-system-api/.flattened-pom.xml
+/ibps-simu-system/ibps-simu-system-biz/.flattened-pom.xml
+/ibps-simu-system/.flattened-pom.xml
+/.flattened-pom.xml
